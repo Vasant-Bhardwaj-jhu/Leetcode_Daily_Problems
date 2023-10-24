@@ -1,0 +1,41 @@
+import List
+                
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        new_nums = sorted(set(nums))
+        n = output = len(nums)
+
+        j = 0
+
+        for i in range(len(new_nums)):
+            while j < len(new_nums) and new_nums[j] < new_nums[i] + n:
+                j += 1
+            
+            count_legal = j - i
+            output = min(output, n - count_legal)
+        
+        return output
+
+
+# class Solution:
+#     def minOperations(self, nums: List[int]) -> int:
+#         n = len(nums)
+#         nums = sorted(set(nums))
+		
+#         answer = float("+inf")
+#         for i, start in enumerate(nums):
+            
+#             search = start + n - 1 
+#             start, end = 0, len(nums)-1
+            
+#             while start <= end:
+#                 mid = start + (end - start) // 2
+#                 if nums[mid] <= search:
+#                     idx = mid
+#                     start = mid + 1
+#                 else:
+#                     end = mid - 1
+            
+#             changes = idx - i + 1
+#             answer = min(answer, n - changes)
+#         return answer
